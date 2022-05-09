@@ -22,85 +22,91 @@ If you have installed Anaconda, you can install the software and run in two step
 
 Download through the gitHub web interface or clone from gitHub, to clone:
 
-`git clone https://github.com/jonathanHuwP/CrystalGrowthTracker.git`
+```console
+git clone https://github.com/jonathanHuwP/CrystalGrowthTracker.git
+```
 
 Open an Anaconda shell and navigate to the CrystalGrowthTracker directory.
 
 Set up the conda environment (if you are a developer see below):
 
-`conda env create -f environment.yml`
+```console
+conda env create -f environment.yml
+```
 
 To activate the CGT Anaconda environment type the following:
 
-`conda activate cgt`
+```console
+conda activate cgt
+```
 
-To build the Qt widgets reqired
+To build the required Qt widgets:
 
-`python .\buildui.py`
+```console
+python .\buildui.py
+```
 
-### Changing the environment
+### Uninstalling the environment
 
-If you need to change an old environment following the inculsion or removal of a package.
-
-List conda environments:
-`conda env list`
+If you need to remove an existing `cgt` environment 
 
 Remove old environments:
-'conda env remove --name cgt'
 
-Update conda:
-`conda update --all`
-
-Create new environment:
-`conda env create -f environment.yml`
-
-Activate:
-`conda activete cgt`
-
-### Runing the Software
+```console
+conda env remove --name cgt
+```
+### Running the software
 
 Open an Anaconda shell and activate the environment:
 
-`conda activate cgt`
+```console
+conda activate cgt
+```
 
 then navigate to the CrystalGrowthTracker directory and run by typing:
-
-`python .\growthtracker.py`
+```console
+python .\growthtracker.py
+```
 
 you can also run from another directory using:
 
-`python C:\Users\uname\Work\CrystalGrowthTracker\growthtracker.py`
-
-or the path relative to your current location.
-
-### Remove the Software
-
-To remove software delete the CrystalGrowthTracker direcory, then delete the environment:
-
-`conda remove --name cgt --all`
+```
+python C:\path\to\CrystalGrowthTracker\growthtracker.py
+```
 
 ## Notes for Developers
 
 If you change the Qt .ui files you will need to rebuild the Ui_<name>.py files by running:
 
-`python .\buildui.py`
+```console
+python ./buildui.py
+```
 
 ### Doxygen Documentation
 
 The software is documented with doxygen.
 
-`conda activate cgt`
+```console
+conda activate cgt
+```
 
 Then, in the CrystalGrowthTracker direcory, run the command:
 
-`doxygen`
+```console
+doxygen
+```
 
-After this has run a doc/html directory will appear. Open the index.html file in this directory.
+This will create a 'doc/html/' directory. Open the 'index.html' file in this directory.
 
 The doxygen documentation for this project lists gives the API (Application Programmers Interface) for all the modules and scripts in this project making it useful to developers who wish to further develop this software.
 
 ### UnitTesting
-Unit tests are in the directory 'tests', which also contains a module for building a dummy restults object.  All he tests can be run using the python script 'unittests.py', which takes a '-q --quiet' command line option.  The script will run all the tests printing results in verbose format unless the quiet option is used. Any individual test module can be run by running the file itself 'python tests\testio.py' for example.
+Unit tests are in the directory 'tests', which also contains a module for
+building a dummy restults object. All he tests can be run using the python
+script 'unittests.py', which takes a '-q --quiet' command line option. The
+script will run all the tests printing results in verbose format unless the
+quiet option is used. Any individual test module can be run by running the file
+itself, e.g. `python tests/testio.py` for example.
 
 A seperate script 'videosourceffmpegtest.py', in the tests directory can be run to test the video reading classes.
 
@@ -110,23 +116,44 @@ The tests are written using the Python unittest module and can also be run using
 Tests of the subprocess calls to ffmpeg cannot be carried out in unittest so the seperate program videosourceffmpegtest.py is provided. Please run this in the cgt enviroment.
 
 ### QT5
-The project uses the Python version of Qt for its GUI. This window is designed visually using a Qt Designer, and saved as a .ui file (XML description of the window). The file is then compiled to an object stump that can be subclassed.
+The project uses the Python bindings of Qt5 for its GUI. This window is designed
+visually using a Qt Designer, and saved as a .ui file (XML description of the
+window). The file is then compiled to an object stump that can be subclassed.
 
 To run the Qt Designer tool open a terminal (this could be an anaconda power shell) and run designer.exe:
 
-`designer`
+```console
+designer
+```
 
-Button, slicers and other QWidgets communicate via message passing (signals to slots), which is set up using the Qt connect function. This can be specified in the ui by Designer, but (without extra custom scripting) Designer will not know the names of the functions you have written as slots. You can add them by right clicking on the design in Designer, select "Change signals/slots" then adding your slot. Alternatively, you can connect the widget to the close function, save and close the design, and then hand edit the XML inserting the name of your function in place of close().
+Button, slicers and other QWidgets communicate via message passing (signals to
+slots), which is set up using the Qt connect function. This can be specified in
+the ui by Designer, but (without extra custom scripting) Designer will not know
+the names of the functions you have written as slots. You can add them by right
+clicking on the design in Designer, select "Change signals/slots" then adding
+your slot. Alternatively, you can connect the widget to the close function, save
+and close the design, and then hand edit the XML inserting the name of your
+function in place of `close()`.
 
 ### QT Translation
 
-The code has been designed to allow translations of the user interface. The process of producing a translation is to extract the text strings needing translation from the .py and .ui files using the Qt program pylupdate5; then use Qt Linguist to read the strings file and add the translations; and finally save the translations as a binary .qm file. It is important to save the latest translation as a phrase book .qph file.  Linguist can open a phrase book alongside a translation file to allow quick filling of unchanged text, this avoids retranslating the entire interface because of the correction of a single typo.  The following describes the production of a translation for German, using an Anaconda PowerShell.
+The code has been designed to allow translations of the user interface. The
+process of producing a translation is to extract the text strings needing
+translation from the .py and .ui files using the Qt program pylupdate5; then use
+Qt Linguist to read the strings file and add the translations; and finally save
+the translations as a binary .qm file. It is important to save the latest
+translation as a phrase book .qph file. Linguist can open a phrase book
+alongside a translation file to allow quick filling of unchanged text, this
+avoids retranslating the entire interface because of the correction of a single
+typo. The following describes the production of a translation for German, using
+an Anaconda PowerShell.
 
 1. Use pylupdate5 to make a .ts file
 
-    '''
+```console
     pylupdate5 .\\CrystalGrowthTrackerMain.py .\\CrystalGrowthTrackerMain.ui .\\PolyLineExtract.py .\\DrawRect.py .\\ImageLabel.py -ts cgtgerman.ts
-    '''
+```
+
 2. Run 'linguist.exe', open the 'cgtgerman.ts', if there is an existing phrase book load that as well.  Carry out the translation, and save the .ts file and save it again as a phrase book, overwriting the existing if necessary.
 
 3. Save the .ts file a third time by selecting 'Release' or 'Release As' on Linguist's 'File' menu.
@@ -134,8 +161,11 @@ The code has been designed to allow translations of the user interface. The proc
 4. Add the appropriate code to the *get_translators* function. Note if you want the buttons of Qt dialogs to be labelled you will have to load the appropriate *qtbase* file.
 
 ### IDEs (Integrated Development Environments)
-Some IDE such as Spyder use QT5 for their GUI (Graphical User Interface). This can cause complications. The conda environment created for this application does not have Spyder included in it and if it were included it would not run. You will need to start Spyder from the Start menu or from a conda shell that does not use the environment for this application.
-
+Some IDE such as Spyder use QT5 for their GUI (Graphical User Interface). This
+can cause complications. The conda environment created for this application does
+not have Spyder included in it and if it were included it would not run. You
+will need to start Spyder from the Start menu or from a conda shell that does
+not use the environment for this application.
 
 You may like to use an IDE that does not use QT5 - some IDE that work well with Anaconda are given right at the very bottom of this web page:
 
